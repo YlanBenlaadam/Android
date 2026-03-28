@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/Mozzarella"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="MOZZARELLA"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/Anchois"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/Gorgonzola"
+        app:layout_constraintVertical_weight="1"
+        />
+
+    <Button
+        android:id="@+id/Gorgonzola"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="GORGONZOLA"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/Capres"
+        app:layout_constraintStart_toEndOf="@id/Mozzarella"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_weight="1"
+        />
+
+    <Button
+        android:id="@+id/Anchois"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="ANCHOIS"
+        app:layout_constraintTop_toBottomOf="@id/Mozzarella"
+        app:layout_constraintBottom_toTopOf="@id/Olives"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/Capres"
+        app:layout_constraintVertical_weight="1"
+        />
+
+    <Button
+        android:id="@+id/Capres"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="CAPRES"
+        app:layout_constraintTop_toBottomOf="@id/Gorgonzola"
+        app:layout_constraintBottom_toTopOf="@id/Artichauts"
+        app:layout_constraintStart_toEndOf="@id/Anchois"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_weight="1"
+        />
+
+    <Button
+        android:id="@+id/Olives"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="OLIVES"
+        app:layout_constraintTop_toBottomOf="@id/Anchois"
+        app:layout_constraintBottom_toTopOf="@id/JambonCru"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/Artichauts"
+        app:layout_constraintVertical_weight="1"
+        />
+
+    <Button
+        android:id="@+id/Artichauts"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="ARTICHAUTS"
+        app:layout_constraintTop_toBottomOf="@id/Capres"
+        app:layout_constraintBottom_toTopOf="@id/JambonCuit"
+        app:layout_constraintStart_toEndOf="@id/Olives"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_weight="1"
+        />
+
+    <Button
+        android:id="@+id/JambonCru"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="JAMBON CRU"
+        app:layout_constraintTop_toBottomOf="@id/Olives"
+        app:layout_constraintBottom_toTopOf="@id/Valider"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/JambonCuit"
+        app:layout_constraintVertical_weight="1"
+        />
+
+    <Button
+        android:id="@+id/JambonCuit"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="JAMBON CUIT"
+        app:layout_constraintTop_toBottomOf="@id/Artichauts"
+        app:layout_constraintBottom_toTopOf="@id/Valider"
+        app:layout_constraintStart_toEndOf="@id/JambonCru"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_weight="1"
+        />
+
+    <Button
+        android:id="@+id/Valider"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="VALIDER"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/JambonCru"
+        app:layout_constraintVertical_weight="1"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
