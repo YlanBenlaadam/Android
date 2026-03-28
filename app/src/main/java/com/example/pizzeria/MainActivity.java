@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
         monThread thread = new monThread(
                 Integer.parseInt(valeur),
                 codePlat,
-                TnumTable,
+                this,
                 handler
         );
         thread.start();
@@ -125,9 +125,26 @@ public class MainActivity extends AppCompatActivity {
         message += "50";
         message += ingredients; // on a bien la forme demander "nTable50ing1..."
         // on envoie la chaine au serveur via le thread
-        monThread thread = new monThread(message, TnumTable, handler);
+        monThread thread = new monThread(message, this, handler);
         thread.start();
     }
+
+    public void reinitialiserLabel() {
+        TnumTable.setText("Table numéro " + valeur);
+    }
+
+    // affiche la réponse du serveur dans un pop-up
+    public void afficherMessage(String message) {
+        // on crée le fragment pop-up avec le message
+        MessageDialogFragment dialog = MessageDialogFragment.creer(message);
+
+        // on affiche le pop-up
+        // getSupportFragmentManager() = le gestionnaire de fragments de l'activité
+        // "dialog_message" = un tag pour identifier ce pop-up (comme "PIZZAS" ou "INGREDIENTS")
+        dialog.show(getSupportFragmentManager(), "dialog_message");
+    }
+
+
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {

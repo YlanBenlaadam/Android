@@ -20,6 +20,8 @@ public class PizzasFragment extends Fragment implements View.OnClickListener {
     private Button Bpanna;
     private Button Btira;
     private Button BpizzaPerso ;
+    private Button Breinitialiser;
+
 
     int nbNapo = 0;
     int nbRoyale = 0;
@@ -62,6 +64,8 @@ public class PizzasFragment extends Fragment implements View.OnClickListener {
         Bpanna = v.findViewById(R.id.PannaCotta);
         Btira = v.findViewById(R.id.Tiramisu);
         BpizzaPerso = v.findViewById(R.id.PizzaPerso);
+        Breinitialiser = v.findViewById(R.id.Reinitialiser);
+
 
         Bnapo.setOnClickListener(this);
         BRoyale.setOnClickListener(this);
@@ -72,6 +76,7 @@ public class PizzasFragment extends Fragment implements View.OnClickListener {
         Bpanna.setOnClickListener(this);
         Btira.setOnClickListener(this);
         BpizzaPerso.setOnClickListener(this);
+        Breinitialiser.setOnClickListener(this);
 
         if (savedInstanceState != null) {
             nbNapo = savedInstanceState.getInt(CLE_SAVE_NAPO);
@@ -156,6 +161,30 @@ public class PizzasFragment extends Fragment implements View.OnClickListener {
                 activity.afficherIngredientsFragment();
             }
         }
+        // si le bouton reinitialiser est cliquer on remet tt les compteurs a 0
+        if (v.getId() == R.id.Reinitialiser) {
+            nbNapo = 0;
+            nbRoyale = 0;
+            nbFromage = 0;
+            nbMonta = 0;
+            nbRaclette = 0;
+            nbHawai = 0;
+            nbPanna = 0;
+            nbTira = 0;
+            nbPizzaPerso = 0;
+
+            Bnapo.setText("Napolitaine : 0");
+            BRoyale.setText("Royale : 0");
+            BqFromages.setText("QuatreFromages : 0");
+            BMontagn.setText("Montagnarde : 0");
+            Bracl.setText("Raclette : 0");
+            Bhawai.setText("Hawai : 0");
+            Bpanna.setText("PannaCotta : 0");
+            Btira.setText("Tiramisu : 0");
+            BpizzaPerso.setText("Pizza personnalisée : 0");
+        }
+        // permettra de reinitialiser le label en haut de l'ecran, via le mainActivity
+        activity.reinitialiserLabel();
     }
 
     public void incrementerPizzaPersonnalisee() {

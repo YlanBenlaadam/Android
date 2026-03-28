@@ -15,22 +15,25 @@ public class monThread extends Thread {
     private int numTable;
     private int numPlat;
     private String messageComplet;
-    private TextView textView;
     private Handler handler;
 
+    // on remplace le TextView par une référence à l'activité
+    // pour pouvoir appeler afficherMessage()
+    private MainActivity activity;
 
-    public monThread(int numTable, int numPlat, TextView textView, Handler handler) {
+
+    public monThread(int numTable, int numPlat, MainActivity activity, Handler handler) {
         this.numTable = numTable;
         this.numPlat = numPlat;
-        this.textView = textView;
+        this.activity = activity;
         this.handler = handler;
         this.messageComplet = null ;
     }
 
-    // Constructeur commande personnalisée
-    public monThread(String messageComplet, TextView textView, Handler handler) {
+    // constructeur pour les commandes personnalisées
+    public monThread(String messageComplet, MainActivity activity, Handler handler) {
         this.messageComplet = messageComplet;
-        this.textView = textView;
+        this.activity = activity;
         this.handler = handler;
     }
 
@@ -39,7 +42,9 @@ public class monThread extends Thread {
         try {
             Socket socket = new Socket("chadok.info", 9874);
 
+            //permet d'ecrire au serveur
             PrintWriter writer = new PrintWriter(socket.getOutputStream(), true);
+            //permet de lire les réponses du serveurs
             BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
             String message = "";
@@ -63,27 +68,19 @@ public class monThread extends Thread {
                 }
             }
 
-            /// On envoie au serveur la table et le plat
+            // on envoie le message au serveur (numtable + numplat)
             writer.println(message);
 
-            /// ici on lit la reponse du serveur
+            // on lit la réponse du serveur
             String reponse1 = reader.readLine();
-
-            // on passe par un ha ndler car notre thread ne peut pas edit le textView
-            handler.post(new Runnable() {
-                @Override
-                public void run() {
-                    // permettra d'afficher la reponse du serveur
-                    textView.setText(reponse1);
-                }
-            });
-
             String reponse2 = reader.readLine();
 
+            // on poste sur le thread principal pour afficher le pop-up
             handler.post(new Runnable() {
                 @Override
                 public void run() {
-                    textView.setText(reponse2);
+                    // on affiche les 2 réponses dans un seul pop-up
+                    activity.afficherMessage(reponse1 + "\n" + reponse2);
                 }
             });
 
@@ -93,7 +90,8 @@ public class monThread extends Thread {
             handler.post(new Runnable() {
                 @Override
                 public void run() {
-                    textView.setText("Erreur de connexion");
+                    // en cas d'erreur, on affiche aussi dans un pop-up
+                    activity.afficherMessage("Erreur de connexion");
                 }
             });
         }
