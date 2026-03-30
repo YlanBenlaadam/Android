@@ -1,0 +1,284 @@
+
+Partie 1 - Prise en main
+Conditions d’achèvement
+Cette partie vous aide à prendre en main l'environnement que nous allons utiliser : AndroidStudio, avec l'émulateur et les tablettes de l'IUT ou votre téléphone personnel, et le découpage des différents composants d'une application Android.
+
+Lancement d'Android Studio
+Sur les machines de l'IUT, suivre ces instructions (lien) pour configurer Android Studio.
+Sur une machine personnelle, suivre ces instructions (lien) pour installer et configurer Android Studio.
+Création de l'application
+Après avoir lancé Android Studio :
+
+Choisir "New Project".
+
+Dans l'onglet "Phone and Tablet", choisir "Empty Views Activity", puis cliquer sur "Next".
+
+Choisir :
+le nom que vous souhaitez lui donner (dans la suite de ce TP, nous l'appellerons "Pizzeria")
+l'endroit où vous souhaitez l'enregistrer. Sur les machines de l'IUT, il faut travailler sur C: (par exemple, dans le répertoire proposé par défaut AndroidStudioProjects) pour des raisons de performances, mais pensez à sauvegarder votre projet sur Z: (ou dans le cloud, ou sur une clé USB) à la fin de chaque séance pour le récupérer la fois suivante !
+Remarque : au lieu de cela, vous pouvez aussi utiliser git, à condition de le maitriser.
+comme langage : Java (et non Kotlin). Si le langage ne vous est pas demandé, c'est que vous vous êtes trompé·e à l'étape précédente, revenez en arrière !
+comme SDK minimum : API 24.
+
+
+Si une fenêtre s'ouvre au sujet de l'utilisation du proxy, cocher la case "Enable HTTPS proxy".
+S'il y a des erreurs d'installation, les ignorer.
+Utilisation d'un émulateur
+Un émulateur sert à émuler un appareil android particulier, afin de développer une application pour divers types d'appareil (téléphone ou tablettes, avec différentes tailles d'écran...) sans pour autant avoir besoin de tous les posséder...!
+
+Dans le cadre de ce module, l'émulateur pourra vous servir également à travailler lorsque vous n'avez pas accès à une tablette ou un téléphone. Pour cela, nous allons créer un émulateur de téléphone.
+
+Cliquer sur l'icône avec un rectangle et le logo Android "Device Manager".
+
+Choisir "Add New Device..." -> "Create Vritual Device", puis choisir parmi les téléphones "Medium Phone", API 24 et Android 7.0 (si besoin, télécharger l'image). Lui donner le nom que vous souhaitez.
+
+Lancer l'émulateur (en cliquant sur le triangle à côté du nom de l'émulateur). Attendre qu'il soit complètement lancé (il doit afficher le bureau Android, éventuellement après déverrouillage).
+
+Par défaut, il s'affiche en petit dans Android Studio. Il est également possible de l'afficher dans une fenêtre séparée : cliquer sur l'icône représentant une fenêtre dans la barre au-dessus de l'émulateur.
+Dans le studio, cliquer sur le triangle vert ("Run 'app'"). L'application s'installe alors et se lance sur l'émulateur ; elle est également dorénavant disponible dans le menu des applications.
+
+L'émulateur doit maintenant afficher "Hello World!"
+Utilisation d'un téléphone ou une tablette
+Allumer et brancher le téléphone ou la tablette.
+Installer et lancer l'application comme précédemment (triangle vert "Run 'app'"), en choisissant cette fois-ci le téléphone ou la tablette dans la liste.
+Si vous utilisez un téléphone ou une tablette personnels, il faut activer le débogage USB :
+Activez les options pour les développeurs : en général, il faut cliquer 7 fois sur le numéro de série du téléphone (dans les paramètres), mais cela peut dépendre du modèle (cherchez sur internet si besoin).
+Dans les options pour les développeurs, activez le débogage USB.
+Composants de l'application
+Dans le menu à gauche du studio, déplier le répertoire "app". Il contient trois sous-répertoires:
+le répertoire manifests contient les fichiers décrivant l'architecture de l'application ;
+le répertoire java contient les fichiers source Java ;
+le répertoire res contient tout ce qui a trait à l'interface graphique de l'application.
+Lire le fichier AndroidManifest.xml du répertoire manifests (voir amphi sur les activités, pp. 2 et 3).
+Lire le fichier MainActivity.java (le nom peut varier suivant le nom de l'application) du répertoire java. Il contient les parties "modèles" et "contrôleur" de l'application. Lire la redéfinition de la méthode onCreate, appelée à la création de l'activité. Un de ses rôles est de démarrer l'interface graphique, via l'appel à la méthode setContentView.
+Lire le fichier activity_main.xml (le nom peut varier suivant le nom de l'application) du répertoire res/layout. Il décrit la partie "vue" de l'activité. Android Studio propose deux modes pour lire ce fichier :
+l'onglet "Code" affiche simplement le contenu du fichier, à savoir du XML décrivant les diverses couches de l'interface, ainsi qu'une prévisualisation du résultat (pour laquelle on peut choisir différents appareils, notamment notre émulateur) ;
+l'onglet "Design" affiche également la prévisualisation du résultat et permet facilement d'ajouter de nouveaux éléments par glisser-déposer, de décrire la position des uns par rapport aux autres, ...
+l'onglet "Split" permet d'afficher les deux en même temps et est conseillé.
+Regarder les deux modes et lire le contenu XML.
+Regarder les fichiers du répertoire res/values. Ils permettent de définir certaines parties graphiques de l'application une fois pour toutes, comme les couleurs (fichier res/values/colors.xml) ou les chaînes de caractères (fichier res/values/string.xml). Dans le développement de votre application, il faudra utiliser au maximum ces fichiers pour éviter de définir plusieurs fois la même chose. Cela offre également plus de généricité, comme par exemple pour gérer facilement les différentes localisations de l'application (version anglaise, française, ... etc), comme expliqué dans une partie complémentaire.
+
+
+
+
+Partie 2 - Interface
+Conditions d’achèvement
+Dans cette partie, vous allez réaliser la première interface de votre application de commandes dans une pizzeria. Cela repose sur l'amphi sur les activités, pages 5 à 19. Pour plus de détails, vous pouvez consulter cette documentation.
+
+Cette interface va comporter des boutons permettant de commander des pizzas, les uns en dessous des autres, et en dessous, des boutons permettant de commander des desserts, les uns à côté des autres. Voici un exemple de ce que vous devez obtenir (vous pouvez choisir d'autres parfums ou proposer davantage de plats) :
+
+Des boutons permettant de commander des pizzas, les uns en dessous des autres, et en dessous, des boutons permettant de commander des desserts, les uns à côté des autres
+
+Interface verticale
+En utilisant uniquement ConstraintLayout (avec les chaînes et les poids), dessinez cette interface verticale pour votre application.
+
+Dans AndroidStudio, vous pouvez commencer par aller sur l'onglet "Design", et :
+
+placer des boutons par glisser/déposer
+ajouter des contraintes en prenant le point dessiné sur un côté d'un bouton et en l'associant à un autre bouton
+créer des chaînes : après avoir ajouté des contraintes, sélectionnez plusieurs boutons (ctrl+clic), faites un clic droit, "Chains", et choisissez l'orientation de la chaîne
+modifier des attributs (cela est souvent plus simple dans le XML).
+Allez également dans l'onglet "Text" pour lire le XML généré et le compléter/modifier si besoin.
+
+Testez votre interface sur la tablette ou l'émulateur.
+
+Observez ce que devient l'interface en faisant tourner la tablette. Que se passe-t-il ? Que se serait-il passé en n'utilisant pas les chaînes et les poids, ou en utilisant d'autres layouts ?
+
+Interface horizontale
+L'interface se dessine correctement en horizontal, mais n'est pas très adaptée. Il est également possible de créer des interfaces différentes selon l'orientation.
+
+Créez un fichier XML pour l'orientation horizontale:
+
+Clic droit sur le répertoire res/layout.
+Choisir New/Layout resource file.
+Lui donner le même nom que l'interface verticale.
+Choisir Orientation/Landscape.
+Valider.
+Dessinez cette interface horizontale pour qu'elle soit plus adaptée à cette orientation. Voici un exemple possible mais vous pouvez imaginer d'autres interfaces :
+
+Boutons répartis en 4x2
+
+Testez en faisant tourner la tablette.
+
+Vous pouvez rendre votre application encore plus portable en proposant plusieurs langues ou des interfaces différentes selon la taille de l'écran.
+
+Modifié le: mardi 3 février 2026, 15:11
+
+
+
+
+Partie 3 - Animation de l'interface
+Conditions d’achèvement
+Dans cette partie, vous allez gérer les évènements de votre interface. Cela repose sur l'amphi sur les activités (lien), pages 20 à 26, et l'amphi sur la vie des activités (lien), pages 26 et 27.
+
+Animation
+Cliquer sur un bouton revient à commander le plat correspondant : on affiche sur le bouton combien de fois le plat associé a été commandé jusqu'à présent. Voici un exemple où on a commandé 3 pizzas montagnardes et 1 tiramisu :
+
+Exemple: on a commandé 3 pizzas montagnardes et 1 tiramisu
+
+Pour cela, suivez les étapes décrites dans le cours :
+
+Récupérez les objets de l'interface (les 8 boutons) dans la redéfinition de la méthode onCreate.
+Associez un écouteur aux 8 boutons.
+Implantez la méthode public void onClick(View v) de l'écouteur pour passer une commande du plat correspondant.
+Rappel MVC : les données ne doivent pas dépendre de l'interface ! Il faut donc stocker le nombre de commandes de chaque plat dans une (ou plusieurs) variable(s).
+
+Testez.
+
+Persistance courte
+Une fois que tout fonctionne, faites tourner la tablette ou l'émulateur. Qu'observez-vous ?
+
+Corrigez le problème en utilisant la persistance courte des données.
+
+Que se passe-t-il également si on quitte l'application (en la supprimant dans le menu des applications ouvertes) et on l'ouvre à nouveau ? Nous verrons comment corriger ce problème un peu plus tard dans le cours.
+
+Pour améliorer votre application, vous pouvez ajouter un bouton de réinitialisation des commandes (lien).
+
+Modifié le: vendredi 13 février 2026, 15:43
+
+
+Partie 4 - Choix de la table du restaurant
+Conditions d’achèvement
+Dans cette partie, vous allez définir une deuxième activité et observer le cyle de vie de vos deux activités. Cela repose sur l'amphi sur la vie des activités (lien).
+
+Plusieurs activités
+Ajoutez une activité à votre application, qui se lancera avant l'activité de sélection des pizzas. Cette activité doit permettre de choisir le numéro de table (dans le restaurant) pour laquelle les pizzas sont commandées. Le numéro de table choisi s'affichera en haut de l'activité de commande de pizzas.
+
+Remarques :
+
+Pour créer facilement une acitivité avec Android Studio, faire un clic droit dans l'arborescence du projet et choisir New/Activity/Empty Views Activity. Cela génère à la fois la vue et le contrôleur, tout en déclarant la nouvelle activité dans le manifeste (comme une activité secondaire, non lancée au démarrage de l'application : il faut donc modifier le manifeste).
+Pour récupérer la valeur entrée par l'utilisateur dans un champ éditable : récupérer le champ dans un objet e de type EditText (comme d'habitude, avec findViewById), puis vous pouvez lire la valeur avec : String.valueOf(e.getText()).
+Exemple : voici un exemple des deux activités que vous aurez :
+
+Interface pour le choix du numéro de table : un champ éditable et un bouton de validation ⇒ Interface pour les commandes de pizzas : une ligne indiquant le numéro de table a été ajoutée
+
+Observation du cycle de vie
+Dans les deux activités, redéfinir toutes les méthodes apparaissant au slide 19 (lien) (onCreate, onStart, onStop, ...) afin que, en plus de ce qu'elles faisaient déjà (il faudra faire appel à la méthode de la super-classe), elles affichent dans la console (Log.i) un message précisant les noms de la méthode et de l'activité.
+
+Observer les messages de la console (onglet "Run") :
+
+en changeant d'activité ;
+en faisant tourner la tablette ;
+en mettant l'application en arrière-plan ;
+en fermant l'application.
+Retrouve-t-on ce qui a été vu en amphi et à la fin de la partie 3 (lien) ?
+
+S'il vous reste du temps, vous pouvez dessiner un logo (lien) pour votre application.
+
+
+
+
+
+
+Modifié le: mardi 24 février 2026, 14:55
+
+
+
+
+Partie 5 - Envoi des commandes en cuisine
+Conditions d’achèvement
+Vous allez maintenant envoyer les commandes de plats à un serveur (informatique), afin que les cuisinier·ères puissent les préparer. Le serveur a une sortie sur une application web disponible à l'adresse http://chadok.info/~ckeller (lien).
+
+Cette partie repose sur l'amphi sur les threads (lien).
+
+Avant d'attaquer toute nouvelle partie, nous demandons de déposer votre projet (lien) dans l'état actuel pour être sûr·e d'avoir remis quelque chose qui fonctionne avant la date limite. C'est la dernière version déposée qui sera évaluée.
+
+ 
+Serveur
+Le serveur a pour nom "chadok.info" et écoute sur le port 9874. Il fonctionne suivant le protocole suivant : lorsqu'un client se connecte :
+
+Attente d'un message indiquant la commande d'un plat, sous la forme d'une chaîne de 4 caractères dont les deux premiers caractères forment un entier compris entre 01 et 99 correspondant au numéro de la table, et les deux derniers caractères forment un entier compris entre 01 et 99 correspondant au plat commandé, suivant un tableau donné sur l'application web du serveur (lien). Attention : les entiers de 1 à 9 doivent être précédés d'un "0" !
+Affichage de la commande sur le serveur web et envoi d'un message au client disant que la commande a bien été passée.
+Lorsque la commande est prête (entre 1 et 2 minutes plus tard dans notre simulation), suppression de la commande sur le serveur web et envoi d'un message au client disant que le plat est prêt.
+Par exemple, si la table n°4 commande une pizza montagnarde, les messages échangés sont les suivants :
+
+client → serveur : "0418"
+serveur → client, immédiatement après : "La table 4 a commandé : montagnarde"
+serveur → client, entre 1 et 2 minutes après : "La commande de la table 4 est prête : montagnarde"
+Premiers pas
+Écrivez une classe héritant de Thread dont la tâche de fond :
+
+se connecte au serveur ;
+envoie le message "0418" (utiliser la méthode println sur le flux sortant) ;
+ferme la connexion.
+Lorsque l'on clique sur un des boutons de commande, créez une instance de cette classe puis exécutez-là afin de lancer le thread.
+
+Testez.
+
+N'oubliez pas de demander les permissions Android pour accéder au réseau et à internet, en mettant dans le manifeste (à l'intérieur des balises manifest, mais en dehors des balises application) :
+
+<uses-permission android:name="android.permission.INTERNET" />
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+Attention : il faut que le système Android soit connecté à internet sans passer par le proxy. Il n'est donc pas possible d'utiliser un émulateur depuis une machine de l'IUT. Vous pouvez utiliser :
+
+un émulateur depuis une machine personnelle
+une tablette de l'IUT, connectée via eduroam (pas eduspot !)
+un téléphone personnel Android si vous en avez un, connecté en 4/5G ou via eduroam.
+Communication complète
+Ajoutez les fonctionalités suivantes, en les testant au fur et à mesure.
+
+Envoyez au serveur le message correspondant à la table et au plat effectivement commandé.
+Réceptionnez le premier message du serveur (disant que la commande a bien été passée) et affichez-le à la place du numéro de table. On utilisera la méthode String readLine() de la classe BufferedReader.
+Réceptionnez le deuxième message du serveur et affichez-le à la place du numéro de table.
+Pour aller plus loin, vous pouvez afficher le message du serveur dans votre application à l'aide d'un pop-up (lien). Vous pouvez également programmer vous-même un serveur Android suivant ce protocole (lien).
+
+Modifié le: mardi 3 mars 2026, 17:32
+
+
+
+
+Partie 6 - Pizza personnalisée
+Conditions d’achèvement
+Avant d'attaquer toute nouvelle partie, nous demandons de déposer votre projet (lien) dans l'état actuel pour être sûr·e d'avoir remis quelque chose qui fonctionne avant la date limite. C'est la dernière version déposée qui sera évaluée.
+
+Le restaurant souhaite proposer une pizza personnalisée dont les ingrédients sont au choix du client. Lorsqu'un client commande une telle pizza, la liste des ingrédients doit s'afficher au lieu de la liste des pizzas à commander.
+
+Cette partie repose sur l'amphi sur les interfaces avancées (lien).
+
+Attention : pour des raisons de compatibilité, la bibliothèque d'Android a deux classes Fragment. Celle qu'il faut utiliser est androidx.fragment.app.Fragment. Vérifier toujours que c'est la bonne classe qui est importée (notamment si vous utilisez les suggestions d'AndroidStudio).
+
+Premier fragment
+Dans l'activité principale, placez les boutons de commande des pizzas et desserts dans un fragment (mais pas l'affichage du numéro de table). Cela nécessite :
+de créer un fragment (vue et contrôleur/modèle) : voir ci-dessous pour savoir comment faire dans AndroidStudio ;
+de déplacer la partie de l'interface avec les boutons dans le code XML du fragment (penser à utiliser ConstraintLayout (par défaut AndroidStudio génère un fichier XML utilisant FrameLayout), et à faire une interface verticale et une horizontale ; l'activité principale n'a maintenant plus besoin que d'une seule interface) ;
+de déplacer la partie du code Java gérant les boutons dans le code Java du fragment (gestion des widgets, écouteur, bundle (qui fonctionne avec les fragments comme avec les activités)). Il est conseillé de laisser la partie communication avec le serveur dans la classe de l'activité, et de créer (dans cette même classe) une méthode prenant en paramètre un message (de stype String) et l'envoyant au serveur.
+[Indice : slides 6 à 8 et 14]
+Pour créer un fragment dans AndroidStudio :
+Clic droit dans l'arboresence, "New -> Fragment -> Fragment (Blank)" et lui donner un nom (ici : PizzasFragment).
+Vérifier que l'import est bien import androidx.fragment.app.Fragment;.
+Supprimer le code généré automatiquement à l'intérieur de la classe Java, sauf le constructeur vide et la méthode onCreateView (mais bien supprimer la méthode onCreate). Il faudra impérativement garder le constructeur vide (mais on peut ajouter d'autres constructeurs non vides si besoin).
+Modifier la méthode onCreateView pour qu'elle ne renvoie plus la vue directement mais la place dans une variable qui sera renvoyée à la fin :
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View v = inflater.inflate(R.layout.fragment_pizzas, container, false);
+
+        // Code à compléter ; par exemple : button = (Button) v.findViewById(R.id.button);
+
+        return v;
+}
+Attachez ce fragment à la place des boutons, sans dynamisme pour l'instant. [Indice : slide 10]
+Testez. Vérifiez que la communication avec le serveur fonctionne toujours.
+Vers du dynamisme
+Dans l'activité principale, faites en sorte que le premier fragment ne soit pas attaché au niveau XML mais au niveau Java lors du premier lancement de l'activite. Attention, il ne faut pas que deux fragment se superposent en faisant tourner la tablette ! [Indice : slides 11 à 13]
+
+Testez, notamment en faisant tourner la tablette.
+
+Deuxième fragment
+Créez un deuxième fragment dont l'interface comporte des boutons avec des ingrédients usuels d'une pizza, et un bouton de validation. Voici une interface possible :
+Exemple d'interface
+Ajoutez au premier fragment un bouton "Pizza personnalisée". Faites en sorte que le premier fragment soit remplacé par le deuxième lorsque l'utilisateur clique sur ce bouton. Testez.
+Programmez le deuxième fragment, en testant à chaque étape :
+Lorsqu'on clique sur le bouton de validation, le premier fragment apparaît de nouveau. Attention : on ne doit pas créer de nouveau fragment afin de conserver les quantités commandées !
+Le nombre de pizzas personnalisées commandées doit être incrémenté de 1.
+Les ingrédients sur lesquels l'utilisateur a cliqué avant le bouton de validation sont transmis en cuisine sous forme d'un message au serveur de la forme : 2 chiffres du numéro de table, suivi de "50", suivi de la liste des ingrédients (par exemple "4250mozarella + gorgonzola + jambon cru").
+Bien tester. Notamment, l'application doit avoir le même comportement qu'avant lorsqu'on fait tourner la tablette alors que le premier fragment est visible. Vous devez également faire en sorte que les ingrédients sélectionnés soient bien conservés lorsqu'on fait tourner la tablette alors que le deuxième fragment est visible.
+
+Remarque : il n'est pas demandé que les nombres de pizzas commandées soient conservés lorsqu'on fait tourner la tablette alors que le deuxième fragment est visible.
+
+
+
+En complément, vous pouvez faire en sorte qu'on puisse visualiser quels ingrédients ont été sélectionnés (lien) et/ou utiliser une liste d'ingrédients au lieu de boutons (lien).
+
+Modifié le: vendredi 13 mars 2026, 18:07
