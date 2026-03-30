@@ -282,3 +282,65 @@ Remarque : il n'est pas demandé que les nombres de pizzas commandées soient co
 En complément, vous pouvez faire en sorte qu'on puisse visualiser quels ingrédients ont été sélectionnés (lien) et/ou utiliser une liste d'ingrédients au lieu de boutons (lien).
 
 Modifié le: vendredi 13 mars 2026, 18:07
+
+
+
+
+Partie 7 - Préférences - Partie complémentaire
+Conditions d’achèvement
+Avant d'attaquer toute nouvelle partie, nous demandons de déposer votre projet (lien) dans l'état actuel pour être sûr·e d'avoir remis quelque chose qui fonctionne avant la date limite. C'est la dernière version déposée qui sera évaluée.
+
+L'objectif de cette partie est de permettre à l'utilisateurice de paramétrer son application. Elle repose sur la partie "Préférences" de l'amphi sur les interfaces avancées.
+
+Dans l'activité de commande des pizzas, ajoutez (au choix) un bouton ou un menu permettant d'accéder à un écran de préférences (un fragment de préférences remplaçant celui des boutons de commande). Faites en sorte que ces préférences permettent à l'utilisateur de choisir la couleur des boutons du fragment des pizzas. Il faudra que l'application tienne compte du choix de l'utilisateur à tout instant, y compris au redémarrage de l'appplication.
+
+Avec AndroidStudio :
+
+Pour créer un fragment de préférences, il faut créer séparemment l'interface XML et le contrôleur Java :
+pour l'interface : clic droit sur l'arboresence du projet, puis "New -> Android Resource File" et choisir une resource de type XML.
+pour le contrôleur : dans l'arborescence, clic droit sur une des classes déjà existantes dans le projet, puis "New -> Java Class". Ne pas oublier d'hériter de PreferenceFragmentCompat.
+Pour créer un menu (si c'est l'option choisie) :
+pour l'interface : clic droit sur l'arboresence du projet, puis "New -> Android Resource File" et choisir une resource de type Menu. Dans le code XML, ajouter dans la balise menu l'attribut xmlns:app="http://schemas.android.com/apk/res-auto".
+pour qu'il apparaisse : ajouter la méthode suivante à votre activité principale, en remplaçant XXX par le nom que vous aurez choisi pour l'interface :
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.XXX, menu);
+        return true;
+    }
+ajouter l'écouteur sur le menu en définissant la méthode :
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // L'item sur lequel l'utilisateur a cliqué
+        int id = item.getItemId();
+
+        // À compléter
+        // ...
+
+        return super.onOptionsItemSelected(item);
+    }
+Si votre application n'a pas de barre de titre, modifiez le ou les fichiers themes.xml se trouvant dans le répertoire res/values afin de choisir un thème n'ayant pas NoActionBar.
+
+On peut choisir la couleur d'un bouton grâce à la méthode void setBackgroundColor (int color) de la classe View. Pour définir des couleurs, utiliser le fichier de resources colors.xml.
+
+Il est conseillé de faire une préférence de type ListPreference :
+
+dans le fichier XML de préférences, mettre une boîte :
+<ListPreference
+    app:title="@string/boutonsChoixCouleur"
+    app:defaultValue="violet"
+    app:key="COULEUR_BOUTONS"
+    app:entries="@array/couleurs"
+    app:entryValues="@array/couleurs"
+    />
+dans le fichier strings.xml, mettre :
+<string name="boutonsChoixCouleur">Choisir une couleur pour les pizzas...</string>
+<string-array name="couleurs">
+    <item>violet</item>
+    <item>rouge</item>
+    <item>vert</item>
+    <item>bleu</item>
+</string-array>
+dans le code Java, là où on doit appliquer les préférences, on peut récupérer la couleur choisie sous forme d'une chaîne de caractères (avec comme valeur par défaut "violet") ainsi :
+SharedPreferences sharedPreferences =
+    PreferenceManager.getDefaultSharedPreferences(getActivity());
+String couleur = sharedPreferences.getString("COULEUR_BOUTONS", "violet");
